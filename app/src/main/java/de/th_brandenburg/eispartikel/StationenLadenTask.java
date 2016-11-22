@@ -4,30 +4,24 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.net.Socket;
 
+import datenKlassen.Kommunikator;
+import datenKlassen.NeueStationenListener;
 import datenKlassen.Station;
 
 public class StationenLadenTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... params) {
-        Socket socket;
         try {
-            socket = new Socket("192.168.56.1", 7000);
-            ObjectInputStream stream = new ObjectInputStream(socket.getInputStream());
-            while(true) {
-                Station station = (Station) stream.readObject();
-                Log.i("MainActivity", station.toString());
-                if (station == null) {
-                    break;
+            Kommunikator kommunikator = new Kommunikator("192.168.56.1");
+            kommunikator.setNeueStationListener(new NeueStationenListener() {
+                @Override
+                public void neueStation(Station station) {
+                    Log.i("MainActivity", "neue Station: " + station.getStationID());
                 }
-            }
-            socket.close();
+            });
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         return null;
