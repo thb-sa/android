@@ -5,25 +5,38 @@ import android.util.Log;
 
 import java.io.IOException;
 
-import datenKlassen.Kommunikator;
-import datenKlassen.NeueStationenListener;
 import datenKlassen.Station;
+import funktionaleKlassen.EinwegClientkommunikator;
+import funktionaleKlassen.NeuesObjektListener;
 
-public class StationenLadenTask extends AsyncTask<Void, Void, Void> {
+class StationenLadenTask extends AsyncTask<Void, Station, Void> implements NeuesObjektListener<Station> {
+    private final static String HOST = "192.168.99.1";
+    private MainActivity mainActivity;
+
+    StationenLadenTask(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
+    }
 
     @Override
     protected Void doInBackground(Void... params) {
+        Log.i("StationLadenTask", "doInBackground");
         try {
-            Kommunikator kommunikator = new Kommunikator("192.168.56.1");
-            kommunikator.setNeueStationListener(new NeueStationenListener() {
-                @Override
-                public void neueStation(Station station) {
-                    Log.i("MainActivity", "neue Station: " + station.getStationID());
-                }
-            });
+            EinwegClientkommunikator clientkommunikator = new EinwegClientkommunikator(HOST, this, EinwegClientkommunikator.EINWEGKOMMUNIKATION);
+            clientkommunikator.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    protected void onProgressUpdate(Station... values) {
+        super.onProgressUpdate(values);
+        mainActivity.showStation(values[0]);
+    }
+
+    @Override
+    public void neuesAustauschobjekt(Station station) {
+        publishProgress(station);
     }
 }
