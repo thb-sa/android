@@ -10,7 +10,7 @@ import funktionaleKlassen.EinwegClientkommunikator;
 import funktionaleKlassen.NeuesObjektListener;
 
 class StationenLadenTask extends AsyncTask<Void, Station, Void> implements NeuesObjektListener<Station> {
-    private final static String HOST = "192.168.99.1";
+    private final static String HOST = "54.89.87.213";
     private MainActivity mainActivity;
 
     StationenLadenTask(MainActivity mainActivity) {
