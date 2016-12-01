@@ -1,4 +1,4 @@
-package de.th_brandenburg.eispartikel;
+package de.th_brandenburg.eispartikel.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import datenKlassen.Aenderungsmeldung;
 import datenKlassen.Station;
 import datenKlassen.Tageswerte;
+import de.th_brandenburg.eispartikel.R;
 import de.th_brandenburg.eispartikel.connection.StationenLadenTask;
 import de.th_brandenburg.eispartikel.connection.StationsAenderungTask;
 
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Station station = stations.get(position);
-        Intent intent = new Intent(this, StationDetails.class);
+        Intent intent = new Intent(this, StationDetailsActivity.class);
 
         intent.putExtra("station", station);
         //intent.putExtra("id", station.getStationID());

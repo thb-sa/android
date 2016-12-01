@@ -1,4 +1,4 @@
-package de.th_brandenburg.eispartikel;
+package de.th_brandenburg.eispartikel.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -15,8 +15,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import datenKlassen.Station;
 import datenKlassen.Tageswerte;
+import de.th_brandenburg.eispartikel.R;
+import de.th_brandenburg.eispartikel.Util;
 
-public class StationDetails extends AppCompatActivity {
+public class StationDetailsActivity extends AppCompatActivity {
     private Station station;
 
     @BindView(R.id.lvWerte)

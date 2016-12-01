@@ -7,7 +7,7 @@ import java.io.IOException;
 import datenKlassen.Aenderungsmeldung;
 import datenKlassen.StationAenderung;
 import de.th_brandenburg.eispartikel.Config;
-import de.th_brandenburg.eispartikel.MainActivity;
+import de.th_brandenburg.eispartikel.activities.MainActivity;
 import funktionaleKlassen.NeuesObjektListener;
 import funktionaleKlassen.ZweiwegeClientkommunikator;
 

@@ -1,4 +1,4 @@
-package de.th_brandenburg.eispartikel;
+package de.th_brandenburg.eispartikel.activities;
 
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +16,8 @@ import butterknife.OnClick;
 import datenKlassen.Aenderungsmeldung;
 import datenKlassen.Station;
 import datenKlassen.StationAenderung;
+import de.th_brandenburg.eispartikel.Config;
+import de.th_brandenburg.eispartikel.R;
 import funktionaleKlassen.NeuesObjektListener;
 import funktionaleKlassen.ZweiwegeClientkommunikator;
 

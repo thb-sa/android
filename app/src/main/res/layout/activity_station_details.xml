@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.th_brandenburg.eispartikel.StationDetails">
+    tools:context="de.th_brandenburg.eispartikel.activities.StationDetailsActivity">
 
     <TextView
         android:id="@+id/tvVorgabe"
