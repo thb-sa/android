@@ -7,16 +7,15 @@ import java.io.IOException;
 import datenKlassen.Aenderungsmeldung;
 import datenKlassen.StationAenderung;
 import de.th_brandenburg.eispartikel.Config;
-import de.th_brandenburg.eispartikel.activities.MainActivity;
 import funktionaleKlassen.NeuesObjektListener;
 import funktionaleKlassen.ZweiwegeClientkommunikator;
 
 public class StationsAenderungTask extends AsyncTask<Void, Aenderungsmeldung, Void> implements NeuesObjektListener<Aenderungsmeldung> {
-    private MainActivity mainActivity;
+    private NeuesObjektListener<Aenderungsmeldung> neuesObjektListener;
     private ZweiwegeClientkommunikator kommunikator;
 
-    public StationsAenderungTask(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
+    public StationsAenderungTask(NeuesObjektListener<Aenderungsmeldung> neuesObjektListener) {
+        this.neuesObjektListener = neuesObjektListener;
     }
 
     @Override
@@ -33,7 +32,7 @@ public class StationsAenderungTask extends AsyncTask<Void, Aenderungsmeldung, Vo
     @Override
     protected void onProgressUpdate(Aenderungsmeldung... values) {
         super.onProgressUpdate(values);
-        mainActivity.updateStation(values[0]);
+        neuesObjektListener.neuesAustauschobjekt(values[0]);
     }
 
 

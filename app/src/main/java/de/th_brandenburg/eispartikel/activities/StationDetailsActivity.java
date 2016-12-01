@@ -9,16 +9,20 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import datenKlassen.Aenderungsmeldung;
 import datenKlassen.Station;
 import datenKlassen.Tageswerte;
 import de.th_brandenburg.eispartikel.R;
 import de.th_brandenburg.eispartikel.Util;
+import de.th_brandenburg.eispartikel.connection.StationsAenderungTask;
+import funktionaleKlassen.NeuesObjektListener;
 
-public class StationDetailsActivity extends AppCompatActivity {
+public class StationDetailsActivity extends AppCompatActivity implements NeuesObjektListener<Aenderungsmeldung> {
     private Station station;
 
     @BindView(R.id.lvWerte)
@@ -32,6 +36,9 @@ public class StationDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_station_details);
         ButterKnife.bind(this);
+
+        StationsAenderungTask stationsAenderungTask = new StationsAenderungTask(this);
+        stationsAenderungTask.execute();
 
         station = (Station) getIntent().getSerializableExtra("station");
         getSupportActionBar().setTitle(station.getStationID());
@@ -65,5 +72,13 @@ public class StationDetailsActivity extends AppCompatActivity {
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, werte);
         lvWerte.setAdapter(arrayAdapter);
+    }
+
+    @Override
+    public void neuesAustauschobjekt(Aenderungsmeldung aenderungsmeldung) {
+        ConcurrentHashMap<String, Tageswerte> werte = station.getAktuelleWerte();
+        werte.put(aenderungsmeldung.getDatum(), aenderungsmeldung.getTageswerte());
+        station.setAktuelleWerte(werte);
+        showWerte();
     }
 }

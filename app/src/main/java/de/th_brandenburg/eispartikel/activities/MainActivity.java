@@ -20,8 +20,9 @@ import datenKlassen.Tageswerte;
 import de.th_brandenburg.eispartikel.R;
 import de.th_brandenburg.eispartikel.connection.StationenLadenTask;
 import de.th_brandenburg.eispartikel.connection.StationsAenderungTask;
+import funktionaleKlassen.NeuesObjektListener;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, NeuesObjektListener<Aenderungsmeldung> {
     private ArrayList<Station> stations = new ArrayList<>();
 
     @BindView(R.id.lvStations)
@@ -73,7 +74,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         startActivity(intent);
     }
 
-    public void updateStation(Aenderungsmeldung aenderung) {
+    @Override
+    public void neuesAustauschobjekt(Aenderungsmeldung aenderung) {
         for(Station station: stations) {
             if(station.getStationID().equals(aenderung.getStationID())) {
                 ConcurrentHashMap<String, Tageswerte> werte = station.getAktuelleWerte();
