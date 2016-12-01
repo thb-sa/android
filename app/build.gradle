@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
     defaultConfig {
         applicationId "de.th_brandenburg.eispartikel"
-        minSdkVersion 10
+        minSdkVersion 11
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -28,6 +28,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
-    compile 'com.github.thb-sa:EispartikelKommunikationsBibliothek:v0.42-beta'
+    compile 'com.github.thb-sa:EispartikelKommunikationsBibliothek:v0.43-beta'
     testCompile 'junit:junit:4.12'
 }

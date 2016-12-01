@@ -1,5 +1,6 @@
 package de.th_brandenburg.eispartikel;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -11,6 +12,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import datenKlassen.Station;
 import datenKlassen.Tageswerte;
 
@@ -33,6 +35,13 @@ public class StationDetails extends AppCompatActivity {
         getSupportActionBar().setTitle(station.getStationID());
         showVorgabe();
         showWerte();
+    }
+    
+    @OnClick(R.id.tvVorgabe)
+    protected void newWert() {
+        Intent intent = new Intent(this, NeueWerteActivity.class);
+        intent.putExtra("station", station);
+        startActivity(intent);
     }
 
     private void showVorgabe() {

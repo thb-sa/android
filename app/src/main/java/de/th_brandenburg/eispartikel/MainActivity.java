@@ -10,10 +10,15 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import datenKlassen.Aenderungsmeldung;
 import datenKlassen.Station;
+import datenKlassen.Tageswerte;
+import de.th_brandenburg.eispartikel.connection.StationenLadenTask;
+import de.th_brandenburg.eispartikel.connection.StationsAenderungTask;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private ArrayList<Station> stations = new ArrayList<>();
@@ -32,11 +37,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     protected void connect() {
         Toast.makeText(this, "connect", Toast.LENGTH_SHORT).show();
-        StationenLadenTask task = new StationenLadenTask(this);
-        task.execute();
+        StationenLadenTask ladenTask = new StationenLadenTask(this);
+        ladenTask.execute();
+
+        StationsAenderungTask aenderungTask = new StationsAenderungTask(this);
+        aenderungTask.execute();
     }
 
-    protected void showStation(Station station) {
+    public void showStation(Station station) {
         stations.add(station);
         showStations();
     }
@@ -62,5 +70,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //intent.putExtra("vorgabewert", station.getVorgabewert());
         //intent.putExtra("aktuelleWerte", station.getAktuelleWerte());
         startActivity(intent);
+    }
+
+    public void updateStation(Aenderungsmeldung aenderung) {
+        for(Station station: stations) {
+            if(station.getStationID().equals(aenderung.getStationID())) {
+                ConcurrentHashMap<String, Tageswerte> werte = station.getAktuelleWerte();
+                werte.put(aenderung.getDatum(), aenderung.getTageswerte());
+            }
+        }
     }
 }

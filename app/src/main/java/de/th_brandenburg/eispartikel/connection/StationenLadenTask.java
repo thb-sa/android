@@ -1,4 +1,4 @@
-package de.th_brandenburg.eispartikel;
+package de.th_brandenburg.eispartikel.connection;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -6,14 +6,15 @@ import android.util.Log;
 import java.io.IOException;
 
 import datenKlassen.Station;
+import de.th_brandenburg.eispartikel.Config;
+import de.th_brandenburg.eispartikel.MainActivity;
 import funktionaleKlassen.EinwegClientkommunikator;
 import funktionaleKlassen.NeuesObjektListener;
 
-class StationenLadenTask extends AsyncTask<Void, Station, Void> implements NeuesObjektListener<Station> {
-    private final static String HOST = "54.89.87.213";
+public class StationenLadenTask extends AsyncTask<Void, Station, Void> implements NeuesObjektListener<Station> {
     private MainActivity mainActivity;
 
-    StationenLadenTask(MainActivity mainActivity) {
+    public StationenLadenTask(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }
 
@@ -21,7 +22,7 @@ class StationenLadenTask extends AsyncTask<Void, Station, Void> implements Neues
     protected Void doInBackground(Void... params) {
         Log.i("StationLadenTask", "doInBackground");
         try {
-            EinwegClientkommunikator clientkommunikator = new EinwegClientkommunikator(HOST, this, EinwegClientkommunikator.EINWEGKOMMUNIKATION);
+            EinwegClientkommunikator clientkommunikator = new EinwegClientkommunikator(Config.HOST, this, EinwegClientkommunikator.EINWEGKOMMUNIKATION);
             clientkommunikator.start();
         } catch (IOException e) {
             e.printStackTrace();
