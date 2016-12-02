@@ -1,7 +1,6 @@
 package de.th_brandenburg.eispartikel.activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -18,16 +17,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import datenKlassen.Aenderungsmeldung;
-import datenKlassen.Station;
 import datenKlassen.Tageswerte;
 import de.th_brandenburg.eispartikel.R;
 import de.th_brandenburg.eispartikel.Util;
-import de.th_brandenburg.eispartikel.connection.StationsAenderungTask;
-import funktionaleKlassen.NeuesObjektListener;
+import de.th_brandenburg.eispartikel.presenter.StationDetailsPresenter;
 
-public class StationDetailsActivity extends AppCompatActivity implements NeuesObjektListener<Aenderungsmeldung> {
-    private Station station;
+public class StationDetailsActivity extends AppCompatActivity {
+    private StationDetailsPresenter presenter;
 
     @BindView(R.id.lvWerte)
     ListView lvWerte;
@@ -41,38 +37,27 @@ public class StationDetailsActivity extends AppCompatActivity implements NeuesOb
         setContentView(R.layout.activity_station_details);
         ButterKnife.bind(this);
 
-        StationsAenderungTask stationsAenderungTask = new StationsAenderungTask(this);
-        stationsAenderungTask.execute();
-
-        station = (Station) getIntent().getSerializableExtra("station");
-        getSupportActionBar().setTitle(station.getStationID());
-        showVorgabe();
-        showWerte();
+        presenter = new StationDetailsPresenter(this);
     }
 
     @OnClick(R.id.tvVorgabe)
-    protected void newWert() {
-        Intent intent = new Intent(this, NeueWerteActivity.class);
-        intent.putExtra("station", station);
-        startActivity(intent);
+    protected void onNewWertClicked() {
+        presenter.onNewWertClicked();
     }
 
-    private void showVorgabe() {
-        tvVorgabe.setText("Vorgabe: " + station.getVorgabewert());
+    public void showVorgabe(int vorgabewert) {
+        tvVorgabe.setText("Vorgabe: " + vorgabewert);
     }
 
-    private void showWerte() {
-        CustomArrayAdapter adapter = new CustomArrayAdapter(this, station.getAktuelleWerte());
+    public void setTitle(String title) {
+        getSupportActionBar().setTitle(title);
+    }
+
+    public void showWerte(ConcurrentHashMap<String, Tageswerte> werte) {
+        CustomArrayAdapter adapter = new CustomArrayAdapter(this, werte);
         lvWerte.setAdapter(adapter);
     }
 
-    @Override
-    public void neuesAustauschobjekt(Aenderungsmeldung aenderungsmeldung) {
-        ConcurrentHashMap<String, Tageswerte> werte = station.getAktuelleWerte();
-        werte.put(aenderungsmeldung.getDatum(), aenderungsmeldung.getTageswerte());
-        station.setAktuelleWerte(werte);
-        showWerte();
-    }
 
     public class CustomArrayAdapter extends ArrayAdapter<ConcurrentHashMap<String, Tageswerte>> {
         private final Context context;
