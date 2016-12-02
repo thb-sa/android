@@ -29,5 +29,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
     compile 'com.github.thb-sa:EispartikelKommunikationsBibliothek:v0.5.2-beta'
+    provided "org.projectlombok:lombok:1.12.6"
     testCompile 'junit:junit:4.12'
 }

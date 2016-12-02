@@ -7,16 +7,14 @@ import java.io.IOException;
 
 import datenKlassen.Station;
 import de.th_brandenburg.eispartikel.Config;
-import de.th_brandenburg.eispartikel.activities.MainActivity;
+import de.th_brandenburg.eispartikel.presenter.MainPresenter;
 import funktionaleKlassen.EinwegClientkommunikator;
 import funktionaleKlassen.NeuesObjektListener;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor(suppressConstructorProperties = true)
 public class StationenLadenTask extends AsyncTask<Void, Station, Void> implements NeuesObjektListener<Station> {
-    private MainActivity mainActivity;
-
-    public StationenLadenTask(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
-    }
+    private MainPresenter mainPresenter;
 
     @Override
     protected Void doInBackground(Void... params) {
@@ -33,7 +31,7 @@ public class StationenLadenTask extends AsyncTask<Void, Station, Void> implement
     @Override
     protected void onProgressUpdate(Station... values) {
         super.onProgressUpdate(values);
-        mainActivity.showStation(values[0]);
+        mainPresenter.neueStation(values[0]);
     }
 
     @Override

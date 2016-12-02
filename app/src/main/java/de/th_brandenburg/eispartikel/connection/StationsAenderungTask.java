@@ -9,14 +9,16 @@ import datenKlassen.StationAenderung;
 import de.th_brandenburg.eispartikel.Config;
 import funktionaleKlassen.NeuesObjektListener;
 import funktionaleKlassen.ZweiwegeClientkommunikator;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor(suppressConstructorProperties = true)
 public class StationsAenderungTask extends AsyncTask<Void, Aenderungsmeldung, Void> implements NeuesObjektListener<Aenderungsmeldung> {
-    private NeuesObjektListener<Aenderungsmeldung> neuesObjektListener;
-    private ZweiwegeClientkommunikator kommunikator;
 
-    public StationsAenderungTask(NeuesObjektListener<Aenderungsmeldung> neuesObjektListener) {
-        this.neuesObjektListener = neuesObjektListener;
-    }
+    @NonNull
+    private NeuesObjektListener<Aenderungsmeldung> neuesObjektListener;
+
+    private ZweiwegeClientkommunikator kommunikator;
 
     @Override
     protected Void doInBackground(Void... params) {
