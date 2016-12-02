@@ -100,7 +100,14 @@ public class StationDetailsActivity extends AppCompatActivity implements NeuesOb
             String abweichung = "(" + Util.plusMinus(wert.getAbweichung()) + " / " + Util.plusMinus(wert.getRelativeAbweichung()) + "%)";
 
             textView.setText(text + " " + abweichung);
-            textView.setTextColor(wert.getAbweichung() >= 0 ? Color.GREEN : Color.RED);
+            switch (wert.getDarstellung()) {
+                case NIEDRIG:
+                    textView.setTextColor(Color.RED);
+                    break;
+                case HOCH:
+                    textView.setTextColor(Color.GREEN);
+                    break;
+            }
 
             return rowView;
         }

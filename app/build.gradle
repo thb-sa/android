@@ -28,6 +28,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
-    compile 'com.github.thb-sa:EispartikelKommunikationsBibliothek:v0.43-beta'
+    compile 'com.github.thb-sa:EispartikelKommunikationsBibliothek:v0.5.2-beta'
     testCompile 'junit:junit:4.12'
 }
