@@ -18,7 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.StationDetailsActivity" />
-        <activity android:name=".activities.NeueWerteActivity"></activity>
+        <activity android:name=".activities.NeueWerteActivity" />
+        <activity android:name=".activities.StationChartActivity"></activity>
     </application>
 
 </manifest>

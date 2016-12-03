@@ -8,6 +8,7 @@ import datenKlassen.Aenderungsmeldung;
 import datenKlassen.Station;
 import datenKlassen.Tageswerte;
 import de.th_brandenburg.eispartikel.activities.NeueWerteActivity;
+import de.th_brandenburg.eispartikel.activities.StationChartActivity;
 import de.th_brandenburg.eispartikel.activities.StationDetailsActivity;
 import de.th_brandenburg.eispartikel.connection.StationsAenderungTask;
 import funktionaleKlassen.NeuesObjektListener;
@@ -57,4 +58,12 @@ public class StationDetailsPresenter implements NeuesObjektListener<Aenderungsme
         activity.showWerte(station.getAktuelleWerte());
     }
 
+    /**
+     * Methode, die ausgeführt wird, wenn auf "Diagramm" geklickt wird
+     */
+    public void onDiagramClicked() {
+        Intent intent = new Intent(activity, StationChartActivity.class);
+        intent.putExtra("station", station);
+        activity.startActivity(intent);
+    }
 }
