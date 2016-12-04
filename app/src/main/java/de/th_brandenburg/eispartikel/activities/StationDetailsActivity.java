@@ -64,7 +64,7 @@ public class StationDetailsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick(R.id.tvVorgabe)
+    @OnClick(R.id.fabNeueWerte)
     protected void onNewWertClicked() {
         presenter.onNewWertClicked();
     }
