@@ -29,6 +29,7 @@ import de.th_brandenburg.eispartikel.presenter.StationDetailsPresenter;
 
 public class StationDetailsActivity extends AppCompatActivity {
     private StationDetailsPresenter presenter;
+    private boolean enableDiagramm = false;
 
     @BindView(R.id.lvWerte)
     ListView lvWerte;
@@ -49,6 +50,7 @@ public class StationDetailsActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.station_details, menu);
+        menu.getItem(0).setEnabled(enableDiagramm);
         return true;
     }
 
@@ -80,6 +82,12 @@ public class StationDetailsActivity extends AppCompatActivity {
         lvWerte.setAdapter(adapter);
     }
 
+    public void setDiagramButton(boolean enable) {
+        if (this.enableDiagramm != enable) {
+            this.enableDiagramm = enable;
+            invalidateOptionsMenu();
+        }
+    }
 
     public class CustomArrayAdapter extends ArrayAdapter<ConcurrentHashMap<String, Tageswerte>> {
         private final Context context;

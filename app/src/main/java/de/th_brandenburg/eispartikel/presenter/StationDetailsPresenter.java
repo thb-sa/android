@@ -56,6 +56,7 @@ public class StationDetailsPresenter implements NeuesObjektListener<Aenderungsme
      */
     private void showWerte() {
         activity.showWerte(station.getAktuelleWerte());
+        activity.setDiagramButton(!station.getAktuelleWerte().isEmpty());
     }
 
     /**
