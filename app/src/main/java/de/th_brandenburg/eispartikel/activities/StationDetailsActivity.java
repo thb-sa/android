@@ -15,6 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 import butterknife.BindView;
@@ -82,13 +84,16 @@ public class StationDetailsActivity extends AppCompatActivity {
     public class CustomArrayAdapter extends ArrayAdapter<ConcurrentHashMap<String, Tageswerte>> {
         private final Context context;
         private final ConcurrentHashMap<String, Tageswerte> values;
-        private final String[] dates;
+        private final List<String> dates;
 
         CustomArrayAdapter(Context context, ConcurrentHashMap<String, Tageswerte> werte) {
             super(context, -1);
             this.context = context;
             this.values = werte;
-            this.dates = values.keySet().toArray(new String[0]);
+            this.dates = Util.oderedTaqe(werte);
+
+            // Zeige neueste Werte zu erst:
+            Collections.reverse(this.dates);
         }
 
         @NonNull
@@ -98,7 +103,7 @@ public class StationDetailsActivity extends AppCompatActivity {
             View rowView = inflater.inflate(R.layout.werte_row, parent, false);
             TextView textView = (TextView) rowView.findViewById(R.id.tv);
 
-            String datum = dates[position];
+            String datum = dates.get(position);
             Tageswerte wert = values.get(datum);
 
             String text = datum + ": " + wert.getAktuellerWert();
@@ -119,7 +124,7 @@ public class StationDetailsActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return dates.length;
+            return dates.size();
         }
     }
 }
