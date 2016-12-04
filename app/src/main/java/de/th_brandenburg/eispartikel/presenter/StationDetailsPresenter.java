@@ -13,10 +13,22 @@ import de.th_brandenburg.eispartikel.activities.StationDetailsActivity;
 import de.th_brandenburg.eispartikel.connection.StationsAenderungTask;
 import funktionaleKlassen.NeuesObjektListener;
 
+/**
+ * Ein Presenter für die Stationsübersicht
+ */
 public class StationDetailsPresenter implements NeuesObjektListener<Aenderungsmeldung> {
     private StationDetailsActivity activity;
+
+    /**
+     * die ausgewählte Station
+     */
     private Station station;
 
+    /**
+     * Konstruktur
+     *
+     * @param activity  Eine Instance von {@link StationDetailsActivity}
+     */
     public StationDetailsPresenter(StationDetailsActivity activity) {
         this.activity = activity;
 

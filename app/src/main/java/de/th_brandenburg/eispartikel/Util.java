@@ -24,6 +24,12 @@ public class Util {
         return (value >= 0 ? "+" : "") + String.valueOf(value);
     }
 
+    /**
+     * Wandelt ein Datum in Textform in einen Unix Timestamp um
+     *
+     * @param dateSting Datum in Textform
+     * @return          Datum in Unix Timestamp
+     */
     public static long dateToTimestamp(String dateSting) {
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         try {

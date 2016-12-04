@@ -12,6 +12,9 @@ import butterknife.OnClick;
 import de.th_brandenburg.eispartikel.R;
 import de.th_brandenburg.eispartikel.presenter.NeueWertePresenter;
 
+/**
+ * Activity zum Anlegen neuer Werte
+ */
 public class NeueWerteActivity extends AppCompatActivity {
     private NeueWertePresenter presenter;
 
@@ -24,6 +27,11 @@ public class NeueWerteActivity extends AppCompatActivity {
     @BindView(R.id.numberPicker)
     NumberPicker numberPicker;
 
+    /**
+     * initialisieren der Activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +42,9 @@ public class NeueWerteActivity extends AppCompatActivity {
         presenter = new NeueWertePresenter(this);
     }
 
+    /**
+     * Methode, die ausgeührt wird, wenn "senden" geklickt wurde
+     */
     @OnClick(R.id.btnSenden)
     protected void senden() {
         String datum = datePicker.getDayOfMonth() + "." + datePicker.getMonth() + '.' + datePicker.getYear();
@@ -42,10 +53,20 @@ public class NeueWerteActivity extends AppCompatActivity {
         presenter.sendenClicked(datum, wert);
     }
 
+    /**
+     * Methode zum Anzeigen des Stationsnamen
+     *
+     * @param stationName   der Stationenname
+     */
     public void setStationName(String stationName) {
         tvStationsName.setText("Station: " + stationName);
     }
 
+    /**
+     * Konfigurieren der UI Komponenten
+     *  - Min und Max Wert des Spinners
+     *  - kein Tag aus der Zukunft erlaubt
+     */
     private void configView() {
         numberPicker.setMinValue(0);
         numberPicker.setMaxValue(100);

@@ -18,12 +18,18 @@ import funktionaleKlassen.NeuesObjektListener;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Presenter für die Stationsübersicht
+ */
 @RequiredArgsConstructor(suppressConstructorProperties = true)
 public class MainPresenter implements NeuesObjektListener<Aenderungsmeldung> {
 
     @NonNull
     private MainActivity mainActivity;
 
+    /**
+     * Liste mit Stationen
+     */
     private ArrayList<Station> stations = new ArrayList<>();
 
     /**

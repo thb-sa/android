@@ -12,6 +12,9 @@ import funktionaleKlassen.ZweiwegeClientkommunikator;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * AsyncTask, der eine Bidirektional Verbindung zum Server hält
+ */
 @RequiredArgsConstructor(suppressConstructorProperties = true)
 public class StationsAenderungTask extends AsyncTask<Void, Aenderungsmeldung, Void> implements NeuesObjektListener<Aenderungsmeldung> {
 
@@ -20,6 +23,13 @@ public class StationsAenderungTask extends AsyncTask<Void, Aenderungsmeldung, Vo
 
     private ZweiwegeClientkommunikator kommunikator;
 
+    /**
+     * Initalisierung
+     * hier wird die Verbindung zum Server aufgebaut
+     *
+     * @param params
+     * @return
+     */
     @Override
     protected Void doInBackground(Void... params) {
         try {
@@ -31,6 +41,12 @@ public class StationsAenderungTask extends AsyncTask<Void, Aenderungsmeldung, Vo
         return null;
     }
 
+    /**
+     * Methode, die bei einem neuen Update ausgeführt wird
+     * Die neue Aenderungsmeldung wird an den Presenter übergeben
+     *
+     * @param values
+     */
     @Override
     protected void onProgressUpdate(Aenderungsmeldung... values) {
         super.onProgressUpdate(values);
@@ -38,16 +54,15 @@ public class StationsAenderungTask extends AsyncTask<Void, Aenderungsmeldung, Vo
     }
 
 
+    /**
+     * Methode, die bei einer neuen Aenderungsmeldung ausgeführt wird.
+     * Jede Aenderung wird als Progress veröffentlicht.
+     *
+     * @param aenderungsmeldung
+     */
     @Override
     public void neuesAustauschobjekt(Aenderungsmeldung aenderungsmeldung) {
         publishProgress(aenderungsmeldung);
     }
 
-    public void sende(StationAenderung aenderung) {
-        try {
-            kommunikator.versende(aenderung);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

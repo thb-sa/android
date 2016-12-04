@@ -25,11 +25,19 @@ import datenKlassen.Tageswerte;
 import de.th_brandenburg.eispartikel.R;
 import de.th_brandenburg.eispartikel.Util;
 
+/**
+ * Activity zum Anzeigen des Diagramms
+ */
 public class StationChartActivity extends AppCompatActivity {
 
     @BindView(R.id.chart)
     LineChart chart;
 
+    /**
+     * initialisieren
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +75,10 @@ public class StationChartActivity extends AppCompatActivity {
         chart.invalidate(); // refresh
     }
 
+    /**
+     * Diese Klasse sorgt dafür, dass keine Zeitstempel, sondern richte Tage dargestellt
+     * angezeigt werden.
+     */
     class HourAxisFormatter extends IndexAxisValueFormatter {
         private DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
