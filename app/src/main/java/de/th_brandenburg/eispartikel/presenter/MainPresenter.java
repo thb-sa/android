@@ -3,6 +3,8 @@ package de.th_brandenburg.eispartikel.presenter;
 import android.content.Intent;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.concurrent.ConcurrentHashMap;
 
 import datenKlassen.Aenderungsmeldung;
@@ -42,6 +44,12 @@ public class MainPresenter implements NeuesObjektListener<Aenderungsmeldung> {
      */
     public void neueStation(Station station) {
         stations.add(station);
+        Collections.sort(stations, new Comparator<Station>() {
+            @Override
+            public int compare(Station lhs, Station rhs) {
+                return lhs.getStationID().compareTo(rhs.getStationID());
+            }
+        });
         updateView();
     }
 
