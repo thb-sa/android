@@ -30,5 +30,8 @@ dependencies {
 
     compile 'com.github.thb-sa:EispartikelKommunikationsBibliothek:v0.5.2-beta'
     provided "org.projectlombok:lombok:1.12.6"
+
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
+
     testCompile 'junit:junit:4.12'
 }

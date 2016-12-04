@@ -5,5 +5,5 @@ package de.th_brandenburg.eispartikel;
  */
 
 public class Config {
-    public final static String HOST = "54.89.87.213";
+    public final static String HOST = "192.168.178.23";
 }
