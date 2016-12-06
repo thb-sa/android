@@ -10,6 +10,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.th_brandenburg.eispartikel.R;
+import de.th_brandenburg.eispartikel.Util;
 import de.th_brandenburg.eispartikel.presenter.NeueWertePresenter;
 
 /**
@@ -47,7 +48,10 @@ public class NeueWerteActivity extends AppCompatActivity {
      */
     @OnClick(R.id.btnSenden)
     protected void senden() {
-        String datum = datePicker.getDayOfMonth() + "." + datePicker.getMonth() + '.' + datePicker.getYear();
+        String tag = Util.fuehrendeNull(datePicker.getDayOfMonth());
+        String monat = Util.fuehrendeNull(datePicker.getMonth() + 1);
+        String jahr = String.valueOf(datePicker.getYear());
+        String datum = tag + "." + monat + "." + jahr;
         int wert = numberPicker.getValue();
 
         presenter.sendenClicked(datum, wert);

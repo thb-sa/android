@@ -59,4 +59,11 @@ public class Util {
         return tage;
     }
 
+    public static String fuehrendeNull(int input) {
+        if (input < 10) {
+            return "0" + input;
+        }
+        return String.valueOf(input);
+    }
+
 }
